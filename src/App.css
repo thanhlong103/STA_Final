@@ -1,51 +1,87 @@
-.status-pulse-connected {
-  animation: pulse-connected 2s infinite;
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
 }
-.status-pulse-disconnected {
-  animation: pulse-disconnected 2s infinite;
-}
-@keyframes pulse-connected {
-  0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.7); }
-  70% { box-shadow: 0 0 0 10px rgba(0, 229, 255, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); }
-}
-@keyframes pulse-disconnected {
-  0% { box-shadow: 0 0 0 0 rgba(255, 64, 129, 0.7); }
-  70% { box-shadow: 0 0 0 10px rgba(255, 64, 129, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 64, 129, 0); }
-}
-.bluetooth-spin {
-  animation: spin 1s linear infinite;
-}
-@keyframes spin {
-  100% { transform: rotate(360deg); }
-}
+
 .logo-text {
   background: linear-gradient(45deg, #00e5ff, #ff4081);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  animation: glow 2s ease-in-out infinite alternate;
 }
+
 .header-text {
   background: linear-gradient(45deg, #00e5ff, #ff4081);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  animation: fadeIn 1.5s ease-out;
 }
+
+.status-pulse-connected {
+  animation: pulseGreen 2s infinite;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.status-pulse-disconnected {
+  animation: pulseRed 2s infinite;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.bluetooth-spin {
+  animation: spin 1s linear infinite;
+}
+
 .imu-gauge {
-  background: radial-gradient(circle, rgba(0, 229, 255, 0.2) 0%, rgba(0, 0, 0, 0.5) 70%);
+  background: radial-gradient(circle, #1c2526 40%, #00e5ff22 70%);
   border-radius: 50%;
   box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .gauge-needle {
+  width: 5px;
+  height: 60px;
+  background: linear-gradient(to top, #ff4081, #00e5ff);
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 4px;
-  height: 40px;
-  background: #ff4081;
   transform-origin: bottom;
-  transform: rotate(0deg);
-  box-shadow: 0 0 10px rgba(255, 64, 129, 0.7);
+  transition: transform 0.5s ease;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #00e5ff, 0 0 10px #ff4081; }
+  to { text-shadow: 0 0 10px #00e5ff, 0 0 20px #ff4081; }
+}
+
+@keyframes pulseGreen {
+  0% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(0, 255, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
+}
+
+@keyframes pulseRed {
+  0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(255, 0, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
